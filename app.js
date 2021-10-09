@@ -34,9 +34,30 @@ const rl = readline.createInterface({
     output: process.stdout,
 })
 
+/*
 rl.question('Masukkan nama Anda : ', (nama) => {
     rl.question('Masukkan noHP anda : ', (noHP) => {
         console.log(`Terimakasih ${nama}, anda telah menambahkan noHP : ${noHP}`);
+        rl.close();
+    })
+
+})
+*/
+
+// Menyimpan data yang di input pada file contacts.json
+rl.question('Masukkan nama Anda : ', (nama) => {
+    rl.question('Masukkan noHP anda : ', (noHP) => {
+        const contact = {nama, noHP}
+        const file = fs.readFileSync('data/contacts.json', 'utf-8')
+        const contacts = JSON.parse(file)
+
+        contacts.push(contact)
+        
+        fs.writeFile('data/contacts.json', JSON.stringify(contacts), (err, data) => {
+            if(err) throw err
+            console.log(`Terimakasih telah memasukkan data`)
+        })
+        
         rl.close();
     })
 
