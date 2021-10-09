@@ -1,5 +1,7 @@
 // File System (bawaan NODE JS / Core Modules)
+// const { rejects } = require('assert');
 const fs = require('fs');
+// const { resolve } = require('path/posix');
 
 // Mrnuliskan string ke sebuah file (Sync)
 /* fs.writeFileSync('data/test.txt', 'Hello World! Secara synchronus');
@@ -57,6 +59,7 @@ if(!fs.existsSync(file)){
 }
 
 // Menyimpan data yang di input pada file contacts.json
+/*
 rl.question('Masukkan nama Anda : ', (nama) => {
     rl.question('Masukkan noHP anda : ', (noHP) => {
         const contact = {nama, noHP}
@@ -74,3 +77,42 @@ rl.question('Masukkan nama Anda : ', (nama) => {
     })
 
 })
+*/
+
+// Mengelompokkan pertanyaan menggunakan Promise
+const pertanyaan1 = () => {
+    return new Promise((resolve, reject) => {
+        rl.question('Masukkan nama Anda : ', (nama) => {
+            resolve(nama);
+        })
+
+    })
+
+}
+
+const pertanyaan2 = () => {
+    return new Promise((resolve, reject) => {
+        rl.question('Masukkan email Anda : ', (email) => {
+            resolve(email);
+        })
+
+    })
+
+}
+
+const main = async () => {
+    const nama = await pertanyaan1();
+    const email = await pertanyaan2();
+
+    const contact = {nama, email}
+    const file = fs.readFileSync('data/contacts.json', 'utf-8')
+    const contacts = JSON.parse(file)
+
+    contacts.push(contact)
+    
+    fs.writeFileSync('data/contacts.json', JSON.stringify(contacts))
+    console.log('Terimakasih sudah mengisi data')
+    rl.close();
+}
+
+main();
