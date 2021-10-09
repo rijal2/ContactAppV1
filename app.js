@@ -44,6 +44,18 @@ rl.question('Masukkan nama Anda : ', (nama) => {
 })
 */
 
+// Membaca atau mencari folder data apakah ada atau tidak menggunakan fs.existSync, jika tidak ada maka buat menggunakan fs.mkdirSync
+const folder = './data'
+if(!fs.existsSync(folder)){
+    fs.mkdirSync(folder)
+}
+
+// Memeriksa apakah file contact.json ada atau tidak menggunakan fs.existsSync, jika tidak ada maka buat menggunakan fs.writeFileSync
+const file = './data/contacts.json'
+if(!fs.existsSync(file)){
+    fs.writeFileSync(file, '[]', 'utf-8')
+}
+
 // Menyimpan data yang di input pada file contacts.json
 rl.question('Masukkan nama Anda : ', (nama) => {
     rl.question('Masukkan noHP anda : ', (noHP) => {
