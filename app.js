@@ -20,7 +20,24 @@ console.log(readFile)
 */
 
 // Membaca file secara Ashyncrhonus
+/*
 fs.readFile('data/test.txt', 'utf-8', (err, data) => {
 if(err) throw err;
 console.log(data)
+})
+*/
+
+// Readline
+const readline = require('readline')
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+})
+
+rl.question('Masukkan nama Anda : ', (nama) => {
+    rl.question('Masukkan noHP anda : ', (noHP) => {
+        console.log(`Terimakasih ${nama}, anda telah menambahkan noHP : ${noHP}`);
+        rl.close();
+    })
+
 })
