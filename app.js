@@ -120,7 +120,7 @@ const main = async () => {
 main();
 */
 
-
+/*
 // TEKNIK 2
 const buatPertanyaan = (pertanyaan) => {
     return new Promise((resolve, reject) => {
@@ -150,4 +150,23 @@ const main = async () => {
 }
 
 main();
+*/
 
+
+const main = async () => {
+    const nama = await buatPertanyaan('Masukkan nama Anda : ');
+    const email = await buatPertanyaan('Masukkan email Anda : ');
+    const noHP = await buatPertanyaan('Masukkan noHP Anda : ');
+
+    const contact = {nama, email, noHP}
+    const file = fs.readFileSync('data/contacts.json', 'utf-8')
+    const contacts = JSON.parse(file)
+
+    contacts.push(contact)
+    
+    fs.writeFileSync('data/contacts.json', JSON.stringify(contacts))
+    console.log('Terimakasih sudah mengisi data')
+    rl.close();
+}
+
+main();
