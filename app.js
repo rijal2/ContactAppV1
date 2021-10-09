@@ -1,6 +1,6 @@
 // File System (bawaan NODE JS / Core Modules)
 // const { rejects } = require('assert');
-const fs = require('fs');
+// const fs = require('fs');
 // const { resolve } = require('path/posix');
 
 // Mrnuliskan string ke sebuah file (Sync)
@@ -30,11 +30,13 @@ console.log(data)
 */
 
 // Readline
+/*
 const readline = require('readline')
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
 })
+*/
 
 /*
 rl.question('Masukkan nama Anda : ', (nama) => {
@@ -46,7 +48,9 @@ rl.question('Masukkan nama Anda : ', (nama) => {
 })
 */
 
+/*
 // Membaca atau mencari folder data apakah ada atau tidak menggunakan fs.existSync, jika tidak ada maka buat menggunakan fs.mkdirSync
+
 const folder = './data'
 if(!fs.existsSync(folder)){
     fs.mkdirSync(folder)
@@ -57,6 +61,9 @@ const file = './data/contacts.json'
 if(!fs.existsSync(file)){
     fs.writeFileSync(file, '[]', 'utf-8')
 }
+*/
+
+
 
 // Menyimpan data yang di input pada file contacts.json
 /*
@@ -151,22 +158,14 @@ const main = async () => {
 
 main();
 */
-
+const {buatPertanyaan, simpanContact} = require('./contacts')
 
 const main = async () => {
     const nama = await buatPertanyaan('Masukkan nama Anda : ');
     const email = await buatPertanyaan('Masukkan email Anda : ');
     const noHP = await buatPertanyaan('Masukkan noHP Anda : ');
 
-    const contact = {nama, email, noHP}
-    const file = fs.readFileSync('data/contacts.json', 'utf-8')
-    const contacts = JSON.parse(file)
-
-    contacts.push(contact)
-    
-    fs.writeFileSync('data/contacts.json', JSON.stringify(contacts))
-    console.log('Terimakasih sudah mengisi data')
-    rl.close();
+    simpanContact(nama, email, noHP)
 }
 
 main();
